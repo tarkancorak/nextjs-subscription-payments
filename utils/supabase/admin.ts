@@ -19,6 +19,11 @@ const supabaseAdmin = createClient<Database>(
 
 const upsertProductRecord = async (product: Stripe.Product) => {
   console.log('+++ upsertProductRecord:', product);
+  if (product.metadata?.is_plan !== "true") {
+    console.log('+++ Not a Plan product. Skipping.');
+    return;
+  }
+
   const productData: Product = {
     id: product.id,
     active: product.active,
