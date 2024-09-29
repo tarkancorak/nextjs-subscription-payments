@@ -33,7 +33,7 @@ const upsertProductRecord = async (product: Stripe.Product) => {
     .upsert([productData]);
   if (upsertError)
     throw new Error(`Product insert/update failed: ${upsertError.message}`);
-  console.log(`Product inserted/updated: ${product.id}`);
+  console.log(`+++ Product inserted/updated: ${product.id}`);
 };
 
 const upsertPriceRecord = async (
