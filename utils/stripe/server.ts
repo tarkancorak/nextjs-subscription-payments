@@ -179,3 +179,91 @@ export async function createStripePortal(currentPath: string) {
     }
   }
 }
+
+export async function processUsageRecord(
+  question: string,
+  flowiseApiKey: string,
+  subscriptionItemId: string,
+  usageThreshold: number = 10000
+): Promise<{ response?: string; errorRedirect?: string }> {
+  try {
+    // Step 1: Zeichen im Fragefeld zählen
+    const charCount = question.length;
+
+    // Step 2: Überprüfe das Guthaben bei Stripe
+    // const usage = await stripe.subscriptionItems.listUsageRecordSummaries(
+    //   subscriptionItemId,
+    //   {
+    //     limit: 1
+    //   }
+    // );
+
+    // const totalUsed = usage.data[0]?.total_usage || 0;
+
+    // // Prüfen, ob noch genug Token übrig sind
+    // if (totalUsed + charCount > usageThreshold) {
+    //   return { errorRedirect: 'Guthaben aufgebraucht!' };
+    // }
+
+    // // Step 3: Sende die Anfrage an Stripe, um den Usage Record zu aktualisieren
+    // await stripe.subscriptionItems.createUsageRecord(subscriptionItemId, {
+    //   quantity: charCount,
+    //   timestamp: Math.floor(Date.now() / 1000),
+    //   action: 'increment'
+    // });
+
+    // Step 4: Anfrage an Flowise senden
+    const flowiseResponse = await fetch(
+      'https://flowise-rfxw.onrender.com/api/v1/prediction/75225840-452c-4330-b639-ccc3f8a99b06',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${flowiseApiKey}` // Flowise API Schlüssel
+        },
+        body: JSON.stringify({ question })
+      }
+    );
+
+    if (!flowiseResponse.body) {
+      throw new Error('Fehler bei der Kommunikation mit Flowise');
+    }
+
+    // Step 5: Stream-Antwort verarbeiten und zusammenführen
+    // const reader = flowiseResponse.body.getReader();
+    // const decoder = new TextDecoder();
+    // let responseText = '';
+    // let done = false;
+
+    // while (!done) {
+    //   const { value, done: readerDone } = await reader.read();
+    //   done = readerDone;
+    //   if (value) {
+    //     const textChunk = decoder.decode(value);
+    //     const matches = textChunk.match(/"data":"([^"]+)"/g);
+    //     if (matches) {
+    //       for (const match of matches) {
+    //         const tokenData = match.match(/"data":"([^"]+)"/);
+    //         if (tokenData && tokenData[1]) {
+    //           responseText += tokenData[1]; // Füge den extrahierten Text zusammen
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // Step 6: Zähle die Zeichen der Antwort und sende Usage Record an Stripe
+    // const responseCharCount = responseText.length;
+    // await stripe.subscriptionItems.createUsageRecord(subscriptionItemId, {
+    //   quantity: responseCharCount,
+    //   timestamp: Math.floor(Date.now() / 1000),
+    //   action: 'increment'
+    // });
+
+    // Step 7: Endgültige Antwort zurückgeben
+    return { response: responseText };
+  } catch (error) {
+    console.error('Error handling request:', error);
+    return { errorRedirect: 'Internal Server Error' };
+  }
+}

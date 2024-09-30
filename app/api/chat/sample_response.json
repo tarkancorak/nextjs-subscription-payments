@@ -1,0 +1,58 @@
+{
+    "text": "Hallo! Wie kann ich Ihnen heute im Van Gogh Museum helfen? Haben Sie Fragen zu Vincent van Gogh, seinem Leben oder seinen Kunstwerken?",
+    "usedTools": [],
+    "artifacts": [],
+    "fileAnnotations": [],
+    "assistant": {
+        "assistantId": "asst_pH9yzldDL81aUDMqiuenkJN3",
+        "threadId": "thread_gD1P53b426qgo8ZtiEv6nxyh",
+        "runId": "run_ywIPDquq88Sp5xvaHZ8LLdiw",
+        "messages": [
+            {
+                "id": "msg_YLYq9umzqL9lOmbvOvX4XlGs",
+                "object": "thread.message",
+                "created_at": 1727714789,
+                "assistant_id": "asst_pH9yzldDL81aUDMqiuenkJN3",
+                "thread_id": "thread_gD1P53b426qgo8ZtiEv6nxyh",
+                "run_id": "run_ywIPDquq88Sp5xvaHZ8LLdiw",
+                "role": "assistant",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "value": "Hallo! Wie kann ich Ihnen heute im Van Gogh Museum helfen? Haben Sie Fragen zu Vincent van Gogh, seinem Leben oder seinen Kunstwerken?",
+                            "annotations": []
+                        }
+                    }
+                ],
+                "attachments": [],
+                "metadata": {}
+            },
+            {
+                "id": "msg_KAQo8yCMSHqMK5nR3GTCmrgW",
+                "object": "thread.message",
+                "created_at": 1727714786,
+                "assistant_id": null,
+                "thread_id": "thread_gD1P53b426qgo8ZtiEv6nxyh",
+                "run_id": null,
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "value": "Hello",
+                            "annotations": []
+                        }
+                    }
+                ],
+                "attachments": [],
+                "metadata": {}
+            }
+        ]
+    },
+    "question": "Hello",
+    "chatId": "9bcfc47a-5492-4381-b159-92c76d9ecc8d",
+    "chatMessageId": "815483ea-4376-4849-8ab6-3fb8effb98d9",
+    "isStreamValid": true,
+    "sessionId": "thread_gD1P53b426qgo8ZtiEv6nxyh"
+}
